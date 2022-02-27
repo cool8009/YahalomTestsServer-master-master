@@ -3,14 +3,18 @@ const container = require("../../containerConfig");
 const TestInstanceService = container.resolve("TestInstanceService");
 
 exports.CreateTestInstance = async (req) => {
-   await TestInstanceService.createTestInstance(req);
+  const email = req.body.Email;
+  const testId = parseInt(req.body.TestId);
+  const firstName = req.body.FirstName;
+  const lastName = req.body.LastName;
+  await TestInstanceService.createTestInstance(testId, email, firstName, lastName);
 };
 
 exports.UpdateTestInstance = async (req) => {
- await TestInstanceService.UpdateTestInstance(req);
+  await TestInstanceService.UpdateTestInstance(req);
 };
 
-exports.GetAllTestInstances = async () => {
+exports.GetAllTestInstance = async () => {
   const result = await TestInstanceService.GetAllTestInstances();
   return result;
 };

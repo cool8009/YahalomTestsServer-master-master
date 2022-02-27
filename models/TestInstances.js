@@ -35,11 +35,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     Grade: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     IsPassed: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
       defaultValue: true
     }
   }, {

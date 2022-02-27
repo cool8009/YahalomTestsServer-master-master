@@ -8,16 +8,17 @@ const TestInstances  = require("../../models/TestInstances")(sequelize, Sequeliz
 
 module.exports = class TestInstancesService {
     
-    async createTestInstances(testInstances) {
-        
-        await TestInstances.create(testInstances)
+    async createTestInstance(testId, email, firstName, lastName) {
+        const newCountDate = new Date().toISOString().slice(0, 10);  
+        await TestInstances.create({TestId: testId, Email: email, FirstName: firstName, 
+            LastName: lastName, DateTaken: newCountDate})
             .then(result =>
                 console.log("TestInstances by " + result.TestInstancesId + " id created"))
             .catch(err =>
                 console.log(err));                      
     }
 
-    async UpdateTestInstances(newTestInstances) {
+    async UpdateTestInstance(newTestInstances) {
         await TestInstances.update({Email: newTestInstances.Email , FirstName: newTestInstances.FirstName,
             Grade: newTestInstances.Grade , LastName: newTestInstances.LastName}, {
             where: {
@@ -29,11 +30,11 @@ module.exports = class TestInstancesService {
             console.log(err));             
     }      
 
-    async GetAllTestInstances() {
+    async GetAllTestInstance() {
         return TestInstances.findAll().catch((err) => {console.log(err)});               
     }
 
-    async GetTestInstancesById(id) {
+    async GetTestInstanceById(id) {
         const result = TestInstances.findOne({ 
             where: {
                 TestInstancesId: id
@@ -44,7 +45,7 @@ module.exports = class TestInstancesService {
         return result;  
     }
 
-    async DeleteTestInstances(Id) {
+    async DeleteTestInstance(Id) {
         await TestInstances.destroy({
             where: {
                 TestInstancesId: Id

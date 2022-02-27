@@ -5,5 +5,5 @@ module.exports = {
     TestController: require('./ControllersFolder/TestController'),
     TagController: require('./ControllersFolder/TagController'),
     CompanyController: require('./ControllersFolder/CompanyController'),
-    TestInstanceService: require('./ControllersFolder/TestInstanceController')
+    TestInstanceController: require('./ControllersFolder/TestInstanceController')
 }
