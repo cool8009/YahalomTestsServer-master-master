@@ -66,4 +66,15 @@ const sequelize = new Sequelize({
             .catch(err =>
                 console.log(err));           
     }      
+    
+    async AddQuestionTag(QuestionId,TagId) {
+        await QuestionTags.create({
+            QuestionId: QuestionId,
+            TagId: TagId
+        })
+        .then(result =>
+            console.log("conection tag to question created"))
+        .catch(err =>
+            console.log(err));                      
+    }
 }

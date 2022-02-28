@@ -10,9 +10,8 @@ exports.CreateQuestion = async (req) => {
      QuestionService.AddQuestionTag(question.QuestionId,tagId);
   });
   await req.Answers.forEach(answer => {
-    answer.QuestionId = question.QuestionId;
-    AnswerController.CreateAnswer(answer);
-  });
+    answer.QuestionId = question.QuestionId;});
+  AnswerController.BulkCreateTag(req.Answers);
 };
 
 exports.UpdateQuestion = async (req) => {
