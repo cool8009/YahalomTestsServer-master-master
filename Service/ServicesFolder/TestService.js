@@ -4,18 +4,19 @@ const sequelize = new Sequelize({
     storage: './data/quizzerdb.db'
   });
   
-const Test  = require("../../models/Tests")(sequelize, Sequelize.DataTypes);
+  const Test  = require("../../models/Tests")(sequelize, Sequelize.DataTypes);
 
-module.exports = class TestService {
-    
-    async createTest(test) {
-        
-        await Test.create(test)
-            .then(result =>
-                console.log("test by " + result.TestId + " id created"))
-            .catch(err =>
-                console.log(err));                      
-    }
+  module.exports = class TestService {
+      
+      async createTest(test) {
+          await Test.create(test)
+              .then(result =>{
+                  console.log("test by " + result.TestId + " id created")
+                  this.res =  result;})
+              .catch(err =>
+                  console.log(err));   
+          return this.res;
+      }
 
     async UpdateTest(newTest) {
         await Test.update({Intro: newTest.Intro, MinimumToPass: newTest.MinimumToPass, Title: newTest.Title}, {

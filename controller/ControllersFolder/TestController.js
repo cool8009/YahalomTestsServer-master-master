@@ -1,9 +1,14 @@
 const container = require("../../containerConfig");
 
+const QuestionController = require("./QuestionController");
 const TestService = container.resolve("TestService")
 
 exports.CreateTest = async (req) => {
- await TestService.createTest(req);
+  const test = await TestService.createTest(req.test);
+  await req.questions.forEach(element => {
+    element.question.TestId = test.TestId;
+    QuestionController.CreateQuestion(element);
+  });
 };
 
 exports.UpdateTest = async (req) => {

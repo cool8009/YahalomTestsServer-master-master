@@ -4,17 +4,20 @@ const sequelize = new Sequelize({
     storage: './data/quizzerdb.db'
   });
   
-const Question  = require("../../models/Questions")(sequelize, Sequelize.DataTypes);
-
-module.exports = class QuestionService {
-    
-    async CreateQuestion(question) {
-        await Question.create(question)
-            .then(result =>
-                console.log(result.Title + " company created"))
-            .catch(err =>
-                console.log(err));                      
-    }
+  const Question  = require("../../models/Questions")(sequelize, Sequelize.DataTypes);
+  const QuestionTags  = require("../../models/QuestionTags")(sequelize, Sequelize.DataTypes);
+  
+  module.exports = class QuestionService {
+      
+       async CreateQuestion(question) {
+          await Question.create(question)
+              .then(result =>{
+                  console.log(result.Title + " question created")
+              this.res = result})
+              .catch(err =>
+                  console.log(err));
+          return this.res;                      
+      }
 
     async UpdateQuestion(newQuestion) {
         await Question.update({Content: newQuestion.Content, Title: newQuestion.Title,}, {

@@ -8,7 +8,7 @@ const Answer  = require("../../models/Answers")(sequelize, Sequelize.DataTypes);
 
 module.exports = class AnswerService {
     
-    async createAnswer(answer) {
+    async CreateAnswer(answer) {
         await Answer.create(answer)
             .then(result =>
                 console.log("Answer by " + result.AnswerId + " id created"))
